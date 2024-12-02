@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>醫療仿單下載網頁</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css.css') }}" />
+    <link rel="icon" href="{{ url_for('static', filename='logo2.png') }}" />
+    <style>
+      /* 確保頁面結構撐開到全高 */
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+      }
+      main {
+        flex: 1;
+      }
+      footer {
+        text-align: center;
+        font-size: 14px;
+        color: gray;
+        background-color: #f0f0f0;
+        padding: 10px 0;
+      }
+      footer a {
+        text-decoration: none;
+        color: gray;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>醫療仿單下載網頁</h1>
+      {% for category, details in data.items() %}
+      <h2>{{ category }}</h2>
+      {% if details.error %}
+      <p style="color: red">{{ details.error }}</p>
+      {% else %}
+      <button>
+        <a
+          href="/download/{{ category }}/all"
+          style="text-decoration: none; color: white; font-weight: bold"
+        >
+          下載所有檔案
+        </a>
+      </button>
+      <ul>
+        <!-- 顯示 ZIP 檔案 -->
+        {% for file in details.files %}
+        <li>
+          <span class="icon">📁</span>
+          <a href="/download/{{ category }}/{{ file|urlencode }}">{{ file }}</a>
+        </li>
+        {% endfor %}
+        <!-- 顯示資料夾 -->
+        {% for folder in details.folders %}
+        <li>
+          <span class="icon">📂</span>
+          <a href="/download_folder/{{ category }}/{{ folder|urlencode }}"
+            >{{ folder }}</a
+          >
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %} {% endfor %}
+    </main>
+
+    <footer>
+      © Design by AIIA Ping-Yen,YU
+      <a
+        href="https://github.com/cookieyu2000/medical_instructions"
+        target="_blank"
+      >
+        GitHub Public Repository
+      </a>
+      <a
+        href="https://sites.google.com/mail1.ncnu.edu.tw/aiia-lab/%E9%A6%96%E9%A0%81/%E5%AF%A6%E9%A9%97%E5%AE%A4%E6%88%90%E5%93%A1?authuser=0"
+        target="_blank"
+      >
+        Contact us
+      </a>
+    </footer>
+  </body>
+</html>

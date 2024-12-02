@@ -1,0 +1,6 @@
+衛福部仿單:
+  folder: "D:/Gene/medical_instructions/NCKU/data/zip"
+  all_zip: "D:/Gene/medical_instructions/NCKU/data/mohw_all.zip"
+台大醫院藥劑部:
+  folder: "D:/Gene/medical_instructions/NTUH/zip"
+  all_zip: "D:/Gene/medical_instructions/NTUH/NTUH_all.zip"
